@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
-        txt_senha = new javax.swing.JTextField();
+        jPassword = new javax.swing.JPasswordField();
         btn_registrar = new javax.swing.JButton();
         btn_entrar = new javax.swing.JButton();
         btn_login = new javax.swing.JButton();
@@ -63,11 +63,13 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setText("Senha");
         jPanel_registro.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 372, -1, -1));
 
+        txt_regis_email.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         txt_regis_email.setForeground(new java.awt.Color(255, 255, 255));
         txt_regis_email.setBorder(null);
         txt_regis_email.setPreferredSize(new java.awt.Dimension(439, 46));
         jPanel_registro.add(txt_regis_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 311, -1, -1));
 
+        txt_regis_usuario.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
         txt_regis_usuario.setForeground(new java.awt.Color(255, 255, 255));
         txt_regis_usuario.setBorder(null);
         txt_regis_usuario.setPreferredSize(new java.awt.Dimension(439, 46));
@@ -127,11 +129,11 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel_login.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 198, -1, -1));
 
-        txt_senha.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        txt_senha.setForeground(new java.awt.Color(255, 255, 255));
-        txt_senha.setBorder(null);
-        txt_senha.setPreferredSize(new java.awt.Dimension(439, 46));
-        jPanel_login.add(txt_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
+        jPassword.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        jPassword.setForeground(new java.awt.Color(255, 255, 255));
+        jPassword.setBorder(null);
+        jPassword.setPreferredSize(new java.awt.Dimension(439, 46));
+        jPanel_login.add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
         btn_registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Registrar.png"))); // NOI18N
         btn_registrar.setBorder(null);
@@ -226,15 +228,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel_login;
     private javax.swing.JPanel jPanel_registro;
+    private javax.swing.JPasswordField jPassword;
     private javax.swing.JTextField txt_regis_email;
     private javax.swing.JTextField txt_regis_senha;
     private javax.swing.JTextField txt_regis_usuario;
-    private javax.swing.JTextField txt_senha;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 private void personalizacao(){
         txt_usuario.setBackground(new java.awt.Color(217,217,217,70));
-        txt_senha.setBackground(new java.awt.Color(217,217,217,70));
+        jPassword.setBackground(new java.awt.Color(217,217,217,70));
         btn_login.setBackground(new java.awt.Color(0,0,0,0));
         btn_entrar.setBackground(new java.awt.Color(0,0,0,0));
         btn_registrar.setBackground(new java.awt.Color(0,0,0,0));
