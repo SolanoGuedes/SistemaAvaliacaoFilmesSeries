@@ -1,3 +1,5 @@
+package telas;
+
 public class PaginaInicial extends javax.swing.JFrame {
 
 
