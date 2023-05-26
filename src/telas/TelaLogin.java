@@ -38,6 +38,7 @@ public class TelaLogin extends javax.swing.JFrame {
         btn_registro = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel_login = new javax.swing.JPanel();
+        jLabel_dadoserra = new javax.swing.JLabel();
         jLabel_preencherlog = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -131,6 +132,11 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel_login.setOpaque(false);
         jPanel_login.setPreferredSize(new java.awt.Dimension(549, 631));
         jPanel_login.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel_dadoserra.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_dadoserra.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel_dadoserra.setText("Email ou senha incorretos");
+        jPanel_login.add(jLabel_dadoserra, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, -1));
 
         jLabel_preencherlog.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_preencherlog.setForeground(new java.awt.Color(255, 0, 0));
@@ -302,6 +308,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_casdastrocon;
+    private javax.swing.JLabel jLabel_dadoserra;
     private javax.swing.JLabel jLabel_preencherlog;
     private javax.swing.JLabel jLabel_preencherreg;
     private javax.swing.JPanel jPanel_login;
@@ -336,6 +343,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel_registro.setVisible(false);
         jLabel_casdastrocon.setVisible(false);
         jLabel_preencherlog.setVisible(false);
+        jLabel_dadoserra.setVisible(false);
 }
     private void entrarLogin(){
         if(txt_usuario.getText().matches("") || jPassword_senha.getText().matches("")){
@@ -364,6 +372,9 @@ public class TelaLogin extends javax.swing.JFrame {
         voltarLogin();
        }  
 }
+    public void dadosErrados(){
+        jLabel_dadoserra.setVisible(true);
+    }
 }
 
 
