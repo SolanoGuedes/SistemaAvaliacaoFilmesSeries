@@ -1,4 +1,4 @@
-package login.model;
+package model;
 
 
 public class Login {

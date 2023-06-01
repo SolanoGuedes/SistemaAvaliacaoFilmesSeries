@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import login.controller.LoginController;
+import controller.LoginController;
 
 
 public class TelaLogin extends javax.swing.JFrame {

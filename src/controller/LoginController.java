@@ -1,11 +1,11 @@
 
-package login.controller;
+package controller;
 
 import telas.TelaLogin;
 import java.sql.Connection;
 import java.sql.SQLException;
-import login.dao.Conexao;
-import login.dao.LoginDAO;
+import dao.Conexao;
+import dao.LoginDAO;
 import telas.PaginaInicial;
 
 public class LoginController {

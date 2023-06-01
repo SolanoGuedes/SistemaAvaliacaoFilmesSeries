@@ -1,7 +1,16 @@
 package telas;
 
-public class PaginaInicial extends javax.swing.JFrame {
+import dao.Conexao;
+import dao.FilmesDAO;
+import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Filme;
 
+public class PaginaInicial extends javax.swing.JFrame {
 
     public PaginaInicial() {
         initComponents();
@@ -10,7 +19,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         esconderMenu();
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -119,6 +127,11 @@ public class PaginaInicial extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens pagina inicial/Group 16.png"))); // NOI18N
         jButton5.setBorder(null);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 507, -1, -1));
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens pagina inicial/nota.png"))); // NOI18N
@@ -204,17 +217,20 @@ public class PaginaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       
+       chamarfilme(1);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void btn_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuActionPerformed
-        aparecerMenu();       
+        aparecerMenu();
     }//GEN-LAST:event_btn_menuActionPerformed
 
     private void btn_voltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarMenuActionPerformed
-       esconderMenu();
+        esconderMenu();
     }//GEN-LAST:event_btn_voltarMenuActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        chamarfilme(2);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -283,29 +299,46 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField txt_pesquisa;
     // End of variables declaration//GEN-END:variables
 
-    private void personPaginaInicial(){
-        btn_menu.setBackground(new java.awt.Color(0,0,0,0));
-        btn_pesquisa.setBackground(new java.awt.Color(0,0,0,0));
-        txt_pesquisa.setBackground(new java.awt.Color(0,0,85,0));
-       
+    private void personPaginaInicial() {
+        btn_menu.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_pesquisa.setBackground(new java.awt.Color(0, 0, 0, 0));
+        txt_pesquisa.setBackground(new java.awt.Color(0, 0, 85, 0));
+
     }
-    private void personBarraMenu(){
-        btn_ListaAlta.setBackground(new java.awt.Color(0,0,0,0));
-        btn_ListaCategorias.setBackground(new java.awt.Color(0,0,0,0));
-        btn_ListaFavoritos.setBackground(new java.awt.Color(0,0,0,0));
-        btn_TelaInicial.setBackground(new java.awt.Color(0,0,0,0));
-        btn_usuario.setBackground(new java.awt.Color(0,0,0,0));
-        btn_voltarMenu.setBackground(new java.awt.Color(0,0,0,0));       
+
+    private void personBarraMenu() {
+        btn_ListaAlta.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_ListaCategorias.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_ListaFavoritos.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_TelaInicial.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_usuario.setBackground(new java.awt.Color(0, 0, 0, 0));
+        btn_voltarMenu.setBackground(new java.awt.Color(0, 0, 0, 0));
     }
-    
-    private void esconderMenu(){
+
+    private void esconderMenu() {
         btn_voltarMenu.setVisible(false);
         Panel_menu.setVisible(false);
     }
-    
-    private void aparecerMenu(){
-       Panel_menu.setVisible(true);
-       btn_voltarMenu.setVisible(true);
+
+    private void aparecerMenu() {
+        Panel_menu.setVisible(true);
+        btn_voltarMenu.setVisible(true);
     }
-   
+    public void chamarfilme(int id){
+       
+        try {
+            Connection conexao = new Conexao().getConnection();
+            FilmesDAO buscarFilmes = new FilmesDAO();
+            
+            List<Filme> filmes = buscarFilmes.buscarFilmes(id);
+            TelaFilmesSeries telaFilmes = new TelaFilmesSeries();
+            telaFilmes.dadosFilme(filmes);
+            telaFilmes.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(PaginaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(PaginaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
