@@ -5,11 +5,9 @@
         <group>
             <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/dao/LoginDAO.java</file>
             <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/controller/LoginController.java</file>
-            <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/dao/FilmesDAO.java</file>
-            <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/model/Filme.java</file>
+            <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/dao/Conexao.java</file>
             <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/telas/PaginaInicial.java</file>
             <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/telas/TelaFilmesSeries.java</file>
-            <file>file:/C:/Users/saulo/OneDrive/Documentos/NetBeansProjects/AvaliacaoFilmesSeries/src/model/Login.java</file>
         </group>
     </open-files>
 </project-private>

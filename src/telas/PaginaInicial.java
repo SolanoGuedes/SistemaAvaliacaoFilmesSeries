@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Filme;
+import model.Login;
 
 public class PaginaInicial extends javax.swing.JFrame {
 
@@ -16,7 +17,7 @@ public class PaginaInicial extends javax.swing.JFrame {
         initComponents();
         personPaginaInicial();
         personBarraMenu();
-        esconderMenu();
+        esconderMenu();       
     }
 
     @SuppressWarnings("unchecked")
@@ -24,11 +25,11 @@ public class PaginaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel_menu = new javax.swing.JPanel();
+        jLabel_usuario = new javax.swing.JLabel();
         btn_TelaInicial = new javax.swing.JButton();
         btn_ListaFavoritos = new javax.swing.JButton();
         btn_ListaCategorias = new javax.swing.JButton();
         btn_ListaAlta = new javax.swing.JButton();
-        btn_usuario = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -67,6 +68,11 @@ public class PaginaInicial extends javax.swing.JFrame {
         Panel_menu.setPreferredSize(new java.awt.Dimension(270, 768));
         Panel_menu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel_usuario.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
+        jLabel_usuario.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_usuario.setText("Usuário");
+        Panel_menu.add(jLabel_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 33, -1, -1));
+
         btn_TelaInicial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens pagina inicial/Group 10_1.png"))); // NOI18N
         btn_TelaInicial.setBorder(null);
         Panel_menu.add(btn_TelaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 147, -1, -1));
@@ -82,13 +88,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         btn_ListaAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens pagina inicial/Group 13_1.png"))); // NOI18N
         btn_ListaAlta.setBorder(null);
         Panel_menu.add(btn_ListaAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 402, -1, -1));
-
-        btn_usuario.setBackground(new java.awt.Color(0, 0, 0));
-        btn_usuario.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
-        btn_usuario.setForeground(new java.awt.Color(255, 255, 255));
-        btn_usuario.setText("Usuário");
-        btn_usuario.setBorder(null);
-        Panel_menu.add(btn_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 36, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens pagina inicial/Line 3.png"))); // NOI18N
         Panel_menu.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 371, -1, -1));
@@ -217,7 +216,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       chamarfilme(1);
+        chamarfilme(1);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void btn_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuActionPerformed
@@ -272,7 +271,6 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btn_TelaInicial;
     private javax.swing.JButton btn_menu;
     private javax.swing.JButton btn_pesquisa;
-    private javax.swing.JButton btn_usuario;
     private javax.swing.JButton btn_voltarMenu;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -294,6 +292,7 @@ public class PaginaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_usuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_pesquisa;
     private javax.swing.JTextField txt_pesquisa;
@@ -311,7 +310,6 @@ public class PaginaInicial extends javax.swing.JFrame {
         btn_ListaCategorias.setBackground(new java.awt.Color(0, 0, 0, 0));
         btn_ListaFavoritos.setBackground(new java.awt.Color(0, 0, 0, 0));
         btn_TelaInicial.setBackground(new java.awt.Color(0, 0, 0, 0));
-        btn_usuario.setBackground(new java.awt.Color(0, 0, 0, 0));
         btn_voltarMenu.setBackground(new java.awt.Color(0, 0, 0, 0));
     }
 
@@ -324,12 +322,17 @@ public class PaginaInicial extends javax.swing.JFrame {
         Panel_menu.setVisible(true);
         btn_voltarMenu.setVisible(true);
     }
-    public void chamarfilme(int id){
-       
+    public void dadousuario(List<Login> usuarios){
+        for(Login usuario : usuarios){
+            jLabel_usuario.setText(usuario.getNome());
+        }
+    }
+
+    public void chamarfilme(int id) {
         try {
             Connection conexao = new Conexao().getConnection();
             FilmesDAO buscarFilmes = new FilmesDAO();
-            
+
             List<Filme> filmes = buscarFilmes.buscarFilmes(id);
             TelaFilmesSeries telaFilmes = new TelaFilmesSeries();
             telaFilmes.dadosFilme(filmes);
