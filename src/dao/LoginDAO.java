@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import model.Login;
-
+import telas.TelaLogin;
 
 public class LoginDAO {
 
@@ -19,8 +17,7 @@ public class LoginDAO {
         conexao.close();
     }
 
-    public  List<Login> login(String email, String senha) throws SQLException {
-        List<Login> usuario = new ArrayList<>();
+    public void login(String email, String senha, TelaLogin tl) throws SQLException {
         Connection conexao = new Conexao().getConnection();
         String sql = "select nome, email from usuarios where email = ? and senha = ?";
         PreparedStatement statement = conexao.prepareStatement(sql);
@@ -30,10 +27,11 @@ public class LoginDAO {
         if (rs.next()) {
             Login login = new Login();
             login.setNome(rs.getString("nome"));
-            login.setEmail(rs.getString("Email"));            
-            usuario.add(login);
+            login.setEmail(rs.getString("email"));  
+            login.abrirPagIni(tl);
+        }else{
+            tl.dadosErrados();         
         }
-              
-        return usuario;
+                     
     }
 }

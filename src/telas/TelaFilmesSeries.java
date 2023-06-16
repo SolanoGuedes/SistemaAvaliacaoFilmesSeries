@@ -1,21 +1,27 @@
 package telas;
 
+import controller.FilmeController;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import model.Filme;
 
 public class TelaFilmesSeries extends javax.swing.JFrame {
-
+public String email;
+public int idFilme;
     public TelaFilmesSeries() {
         initComponents();
         esconderMenu();
-        esconderpainelAvaliar();        
+        esconderpainelAvaliar();      
     }
 
     @SuppressWarnings("unchecked")
@@ -79,7 +85,7 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
         lbl_nota.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lbl_nota.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nota.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_nota.setText("?");
+        lbl_nota.setText("0");
         getContentPane().add(lbl_nota, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 215, 50, 30));
 
         lbl_estrela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens tela filmes/Star 14.png"))); // NOI18N
@@ -90,6 +96,11 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens tela filmes/Group 16.png"))); // NOI18N
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel_avaliacao.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 236, -1, -1));
 
         lbl_nfnota.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -371,8 +382,10 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
         jLabel_avaliacao.setBackground(new java.awt.Color(0, 0, 0));
         jLabel_avaliacao.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel_avaliacao.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_avaliacao.setText("0,0");
-        jPanel1.add(jLabel_avaliacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 140, -1, -1));
+        jLabel_avaliacao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_avaliacao.setText("0");
+        jLabel_avaliacao.setToolTipText("");
+        jPanel1.add(jLabel_avaliacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 30, -1));
 
         jLabel_capa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens tela filmes/Rectangle 8.png"))); // NOI18N
         jPanel1.add(jLabel_capa, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 233, 137, 203));
@@ -386,7 +399,7 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("/10");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 30, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -463,6 +476,30 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         mostrarnota(9);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    try {
+        avaliar();
+    } catch (SQLException ex) {
+        Logger.getLogger(TelaFilmesSeries.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getIdFilme() {
+        return idFilme;
+    }
+
+    public void setIdFilme(int idFilme) {
+        this.idFilme = idFilme;
+    }
 
     public static void main(String args[]) {
 
@@ -579,7 +616,10 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
             jLabel_sinopse.setText("<html>" + filme.getSinopse() + "<html>");
             jLabel_titulo.setText(filme.getTitulo());
             lbl_nfnota.setText(filme.getTitulo());
-            jLabel_avaliacao.setText(Double.toString(filme.getMediaAvaliacao()));
+            
+            DecimalFormat df = new DecimalFormat("#.#");
+            String mediaavaliacaoformatada = df.format(filme.getMediaAvaliacao());
+            jLabel_avaliacao.setText(mediaavaliacaoformatada);
 
             String urlcapa = filme.getCapa();
             ImageIcon imagecapa = new ImageIcon(new URL(urlcapa));
@@ -606,5 +646,11 @@ public class TelaFilmesSeries extends javax.swing.JFrame {
                 }
             });
         }
+    }
+    private void avaliar() throws SQLException {
+        int notaFilme = Integer.parseInt( lbl_nota.getText());
+        FilmeController av = new FilmeController();
+        av.avaliarfilmes(notaFilme, email, idFilme);
+        esconderpainelAvaliar();
     }
 }

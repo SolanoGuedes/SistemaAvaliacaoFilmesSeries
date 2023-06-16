@@ -1,5 +1,6 @@
 package telas;
 
+import controller.FilmeController;
 import dao.Conexao;
 import dao.FilmesDAO;
 import java.net.MalformedURLException;
@@ -9,15 +10,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Filme;
-import model.Login;
-
+        
 public class PaginaInicial extends javax.swing.JFrame {
-
+    public String email;
+    public String nome;
     public PaginaInicial() {
         initComponents();
         personPaginaInicial();
         personBarraMenu();
-        esconderMenu();       
+        esconderMenu();
     }
 
     @SuppressWarnings("unchecked")
@@ -231,6 +232,22 @@ public class PaginaInicial extends javax.swing.JFrame {
         chamarfilme(2);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -322,10 +339,8 @@ public class PaginaInicial extends javax.swing.JFrame {
         Panel_menu.setVisible(true);
         btn_voltarMenu.setVisible(true);
     }
-    public void dadousuario(List<Login> usuarios){
-        for(Login usuario : usuarios){
-            jLabel_usuario.setText(usuario.getNome());
-        }
+    public void dadousuario(String nome){
+            jLabel_usuario.setText(nome);
     }
 
     public void chamarfilme(int id) {
@@ -334,8 +349,11 @@ public class PaginaInicial extends javax.swing.JFrame {
             FilmesDAO buscarFilmes = new FilmesDAO();
 
             List<Filme> filmes = buscarFilmes.buscarFilmes(id);
+            FilmeController idfilme = new FilmeController();
             TelaFilmesSeries telaFilmes = new TelaFilmesSeries();
             telaFilmes.dadosFilme(filmes);
+            telaFilmes.email = email;
+            telaFilmes.idFilme = id;
             telaFilmes.setVisible(true);
             dispose();
         } catch (SQLException ex) {

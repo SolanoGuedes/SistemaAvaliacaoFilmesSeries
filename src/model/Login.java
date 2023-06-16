@@ -1,11 +1,14 @@
 package model;
 
+import telas.PaginaInicial;
+import telas.TelaLogin;
+
 
 public class Login {
     
     private String nome, email, senha;   
 
-     
+
     public void cadastrar(String nome, String email, String senha ){
         this.nome = nome;
         this.email = email;
@@ -36,6 +39,12 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-  
-    
-}
+   public void abrirPagIni(TelaLogin tl){
+            PaginaInicial pg = new PaginaInicial();
+            pg.dadousuario(nome);
+            pg.email = email;
+            pg.setVisible(true);  
+            tl.dispose(); 
+        }
+    }   
+   

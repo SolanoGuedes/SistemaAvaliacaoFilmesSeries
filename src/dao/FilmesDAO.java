@@ -13,7 +13,7 @@ public class FilmesDAO {
        List<Filme> rstFilme = new ArrayList<>();
        
     public List<Filme> buscarFilmes(int idFilme) throws SQLException{
-        
+       
         Connection conexao = new Conexao().getConnection();
         String sql = "SELECT f.titulo, f.capa, f.capa_trailer, f.url_trailer, f.sinopse, f.onde_assistir, f.onde_assistir_url, AVG(r.nota) AS media FROM filmes_series f JOIN avaliacao r ON f.id = r.id_filme WHERE f.id = ?";
         PreparedStatement statement = conexao.prepareStatement(sql);
@@ -34,5 +34,16 @@ public class FilmesDAO {
          }
         return rstFilme;
                
+    }
+    public void avaliarFilmes(int nota, String email, int idfilme) throws SQLException{
+        Connection conexao = new Conexao().getConnection();
+        String sql = "insert into avaliacao (nota, email_usuario, id_filme) values (?, ?, ?)";
+        PreparedStatement statement = conexao.prepareStatement(sql);
+        statement.setInt(1,nota);
+        statement.setString(2, email);
+        statement.setInt(3, idfilme);
+        statement.executeUpdate();
+       
+        
     }
 }
